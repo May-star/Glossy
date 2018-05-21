@@ -25,8 +25,30 @@ class ViewController: NSViewController {
 }
 
 extension ViewController {
-    @IBAction func tappedOpenButton(_ sender: Any) {
-        NSLog(#function)
+    private func openOpenPanel() {
+        guard let window = NSApplication.shared.mainWindow else {
+            return
+        }
+        
+        let panel: NSOpenPanel = NSOpenPanel()
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = false
+        panel.allowsMultipleSelection = false
+        panel.resolvesAliases = true
+        
+        panel.beginSheetModal(for: window) { (response: NSApplication.ModalResponse) in
+            // pass
+            if response == .OK {
+                if let urlstr = panel.url?.absoluteString {
+                    NSLog(urlstr)
+                }
+            }
+        }
     }
 }
-
+extension ViewController {
+    @IBAction func tappedOpenButton(_ sender: Any) {
+        NSLog(#function)
+        self.openOpenPanel()
+    }
+}
