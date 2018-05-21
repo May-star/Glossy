@@ -22,6 +22,11 @@ class ViewController: NSViewController {
         }
     }
 
+}
 
+extension ViewController {
+    @IBAction func tappedOpenButton(_ sender: Any) {
+        NSLog(#function)
+    }
 }
 
